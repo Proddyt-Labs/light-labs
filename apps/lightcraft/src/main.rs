@@ -48,6 +48,8 @@ struct App(LightcraftApp, PrefsWriter, #[cfg(target_os = "macos")] Option<native
 
 impl eframe::App for App {
     fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        // Proddyt Switch: asks to update from the fork's releases (LABS-156).
+        labs_updater::frame(ctx, "light-labs", "Light Labs");
         #[cfg(target_os = "macos")]
         if let Some(m) = self.2.as_mut() {
             m.update(&mut self.0, ctx);
